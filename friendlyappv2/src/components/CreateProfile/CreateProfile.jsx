@@ -5,12 +5,14 @@ class UpdateProfile extends Component {
     constructor(props) {
         super(props);
         this.state = { 
+            user: {},
             birthDate: "",
             location:"",
             imageUpload: {},
             bio: "",
             interests: "",
-            foodPreferences: ""
+            foodPreferences: "",
+            friends: "",
         
 
             
