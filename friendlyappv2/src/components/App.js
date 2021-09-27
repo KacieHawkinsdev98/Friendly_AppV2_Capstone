@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from './Login/Login';
 import Signup from './SignUp/SignUp';
 import Profile from './Profile/Profile';
+import UpdateProfile from './UpdateProfile/UpdateProfile';
 
 
 
@@ -21,15 +22,16 @@ class App extends Component {
    
      return (
     <Container className="d-flex align-items-center justify-content-center"
-    style={{ minHeight: "100vh"}}
+    styles={{ minHeight: "100vh"}}
     >
-        <div className="w-100" style={{ maxWidth: "400px"}}>
+        <div className="w-100" styles={{ maxWidth: "400px"}}>
    
     <Router>
      <Switch>
        <Route exact path="/" component={Login}  />
        <Route path="/signup" component={Signup}  />
        <Route path="/profile" component={Profile} /> 
+       <Route path="/manageprofile" component={UpdateProfile} />
        
     </Switch>
     </Router>
