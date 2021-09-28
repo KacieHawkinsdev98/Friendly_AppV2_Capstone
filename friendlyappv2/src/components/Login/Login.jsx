@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Card, Button, Form} from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
 class Login extends Component {
@@ -42,16 +44,45 @@ async userLogin(user){
 
      render() { 
         return ( 
-        <form onSubmit={this.handleSubmit}>
-        <label>Login</label>
-        <label>Username</label>
-        <input type="text" name="username" onChange={this.handleChange} value={this.state.username}/>
-        <label>Password</label>
-        <input type="text" name="password" onChange={this.handleChange} value={this.state.password}/>
-        <button type="submit">Login</button>
-        </form>
+
+            <>
+               <h1 className="text=center mb-7">Friendly</h1>
+        
+            <Card  style={{ width: '25rem' }}>
+              <Card.Body>
+                <h2 className="text-center mb-4">Log In</h2>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Group id="username">
+                    <Form.Label>User Name</Form.Label>
+                    <Form.Control 
+                    type="text" name="username" 
+                    placeholder="username"
+                    onChange={this.handleChange} 
+                    value={this.username}/>
+                  </Form.Group>
+                  <Form.Group id="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" name="password" 
+                    placeholder="password"
+                    onChange={this.handleChange} 
+                    value={this.password}/>
+                  </Form.Group>
+                  <Button className="w-100" type="submit">
+                    Log In
+                  </Button>
+                </Form>
+                  <div className="w-100 text-center mt-2">
+              Need an account? <Link to="/signup">Sign Up</Link>
+            </div>
+              </Card.Body>
+            </Card>
+          
+          </>
+
+   
          );
     }
 }
  
 export default Login;
+

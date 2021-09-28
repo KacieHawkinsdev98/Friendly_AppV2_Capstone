@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Dropdown } from 'react-bootstrap';
 import UploadPhoto from './ProfilePic'; 
+import InterestsCheckbox from './InterestsCheckboxes'
 // import './UpdateProfile.css';
 
 
@@ -53,7 +54,7 @@ class UpdateProfile extends Component {
     async updateUser(user) {
         console.log(user)
       try{
-      let response = await axios.post('http://127.0.0.1:8000/api/auth/profile/',user);
+      let response = await axios.post('http://127.0.0.1:8000/profile',user);
       console.log(response.data)
     }
       catch (ex) {
@@ -72,17 +73,12 @@ class UpdateProfile extends Component {
     <h4 className="pb-4 border-bottom">Manage Profile</h4>
     <div className="d-flex align-items-start py-3 border-bottom"> 
     {/* <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" classNameName="img" alt=""> */}
-        <div className="pl-sm-4 pl-2" id="img-section"> <b>Profile Photo</b>
-        <button className="btn button border" 
-        type='submit'
-        value={UploadPhoto}
-        ><b>Upload</b></button>
-        </div>
+       <UploadPhoto/>
     </div>
     <div className="py-2">
         <div className="row py-2">
             <div className="col-md-6"> 
-            <label for="location">Location</label> 
+            <label >Location</label> 
             <input type="text" 
             className="bg-light form-control" 
             onChange={this.handleChange}
@@ -90,14 +86,15 @@ class UpdateProfile extends Component {
             ></input>
             </div>
             <div className="col-md-6 pt-md-0 pt-3"> 
-            <label for="bio">Bio</label> 
-            <textarea class="form-control" rows="5" id="comment"></textarea>
+            <label >Bio</label> 
+            <textarea className="form-control" rows="5" id="comment"></textarea>
             <input
             onChange={this.handleChange}
             value={this.bio}
             />
             </div>
         </div>
+        <InterestsCheckbox/>
         <Dropdown>
   <Dropdown.Toggle variant="success" id="dropdown-basic">
     Food Preferences

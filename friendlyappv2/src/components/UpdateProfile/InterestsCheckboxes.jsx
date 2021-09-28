@@ -30,7 +30,7 @@ class InterestsCheckbox extends Component {
   
     onChangeoutdoorActivities = () => {
       this.setState(initialState => ({
-        isoutdoorActivities: !initialState.  isoutdoorActivities,
+        isoutdoorActivities: !initialState.isoutdoorActivities,
       }));
     }
   
@@ -61,7 +61,7 @@ class InterestsCheckbox extends Component {
         checkbox: checkArray.toString()
       };
   
-      axios.post('http://localhost:4000/api/checkbox-save', checkData)
+      axios.post('http://127.0.0.1:8000/api/auth/profile/', checkData)
         .then((res) => {
           console.log(res.data)
         }).catch((error) => {
@@ -71,7 +71,7 @@ class InterestsCheckbox extends Component {
   
     render() {
       return (
-        <div className="App">
+        <div className="InterestsCheckboxes">
           <h2>Interests</h2>
           <form onSubmit={this.onSubmit}>
             <div className="form-check">
@@ -130,7 +130,7 @@ class InterestsCheckbox extends Component {
             </div>
   
             <div className="form-group">
-              <button className="btn btn-success">
+              <button type="submit" className="btn btn-success">
                 Save
               </button>
             </div>

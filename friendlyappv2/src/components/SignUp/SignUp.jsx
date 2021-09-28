@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Card, Button, Form} from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
 class Signup extends Component { 
@@ -48,25 +50,67 @@ class Signup extends Component {
     
     }
             
-    render(){
-    return(
-        <form onSubmit={this.handleSubmit}>
-        <label>First Name</label>
-        <input type="text" name="firstName" onChange={this.handleChange} value={this.state.firstName}/>
-        <label>Last Name</label>
-        <input type="text" name="lastName" onChange={this.handleChange} value={this.state.lastName}/>
-        <label>Email</label>
-        <input type="text" name="emailAddress" onChange={this.handleChange} value={this.state.emailAddress}/>
-        <label>User Name</label>
-        <input type="username" name="userName" onChange={this.handleChange} value={this.state.userName}/>
-        <label>Password</label>
-        <input type="password" name="password" onChange={this.handleChange} value={this.state.password}/>
-        <button type="submit">Register</button>
-        </form>
+render() { 
+    return ( 
 
-    )};
-
+        <>
+           <h1 className="text=center mb-7">Friendly</h1>
     
+        <Card  style={{ width: '25rem' }}>
+          <Card.Body>
+            <h2 className="text-center mb-4">Sign Up</h2>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group id="username">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control 
+                type="text" name="firstname" 
+                placeholder="first name"
+                onChange={this.handleChange} 
+                value={this.firstName}/>
+              </Form.Group>
+              <Form.Group id="lastname">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control type="lastname" name="lastname" 
+                placeholder="last name"
+                onChange={this.handleChange} 
+                value={this.lastName}/>
+              </Form.Group>
+              <Form.Group id="emailAddress">
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control type="email" name="emailAddress" 
+                placeholder="email address"
+                onChange={this.handleChange} 
+                value={this.emailAddress}/>
+              </Form.Group>
+              <Form.Group id="userName">
+                <Form.Label>User Name</Form.Label>
+                <Form.Control type="username" name="username" 
+                placeholder="Username"
+                onChange={this.handleChange} 
+                value={this.userName}/>
+              </Form.Group>
+              <Form.Group id="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" name="password" 
+                placeholder="Password"
+                onChange={this.handleChange} 
+                value={this.password}/>
+              </Form.Group>
+              <Button className="w-100" type="submit">
+                Sign Up!
+              </Button>
+            </Form>
+              <div className="w-100 text-center mt-2">
+          Already have an account? <Link to="./">Login</Link>
+        </div>
+          </Card.Body>
+        </Card>
+      
+      </>
+
+
+     );
+}
 }
 
 export default Signup;

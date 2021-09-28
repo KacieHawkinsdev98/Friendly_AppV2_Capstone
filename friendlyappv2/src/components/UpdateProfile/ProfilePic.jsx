@@ -17,7 +17,7 @@ export default function UploadPhoto() {
     const formData = new FormData();
     formData.append("image", image.raw);
 
-    await fetch('http://127.0.0.1:8000/api/auth/register/', {
+    await fetch('http://127.0.0.1:8000/profile/', {
       method: "POST",
       headers: {
         "Content-Type": "multipart/form-data"
@@ -37,14 +37,14 @@ export default function UploadPhoto() {
               <i className="fas fa-circle fa-stack-2x" />
               <i className="fas fa-store fa-stack-1x fa-inverse" />
             </span>
-            <h5 className="text-center">Upload your photo</h5>
+           
           </>
         )}
       </label>
       <input
         type="file"
         id="upload-button"
-        style={{ display: "none" }}
+        style={{ display: "button" }}
         onChange={handleChange}
       />
       <br />
