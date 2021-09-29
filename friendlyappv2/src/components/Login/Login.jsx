@@ -8,7 +8,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            username: "",
+            emailAddress: "",
             password: ""
          };
     
@@ -31,7 +31,7 @@ async userLogin(user){
     handleSubmit = (event) => {
         event.preventDefault();
         var user = {
-            username: this.state.username,
+            email: this.state.emailAddress,
             password: this.state.password
         };
         this.userLogin(user)
@@ -52,13 +52,13 @@ async userLogin(user){
               <Card.Body>
                 <h2 className="text-center mb-4">Log In</h2>
                 <Form onSubmit={this.handleSubmit}>
-                  <Form.Group id="username">
-                    <Form.Label>User Name</Form.Label>
+                  <Form.Group id="email">
+                    <Form.Label>Email</Form.Label>
                     <Form.Control 
-                    type="text" name="username" 
-                    placeholder="username"
+                    type="email" name="email" 
+                    placeholder="Email Address"
                     onChange={this.handleChange} 
-                    value={this.username}/>
+                    value={this.emailAddress}/>
                   </Form.Group>
                   <Form.Group id="password">
                     <Form.Label>Password</Form.Label>

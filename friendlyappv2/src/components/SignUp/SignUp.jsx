@@ -2,36 +2,37 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Card, Button, Form} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import './Signup.css';
 
 
 class Signup extends Component { 
-    state = {
-    
-        firstName: "",
-        lastName: "",
-        emailAddress: "",
-        userName: "",
+    constructor(state) {
+        super(state);
+        this.state = { 
+        
+        first_name: "",
+        last_name: "",
+        email: "",
+        username: "",
         password: ""
-
-    }
-
+    };
+    
+ 
+}
      
  handleChange = (event) => {
     console.log (event.target.value)
     this.setState({
-        [event.target.name]: event.target.value,
-        
-
-    })
+        [event.target.name]: event.target.value});
  };
 
  handleSubmit = (event) => {
     event.preventDefault();
     var user ={
-        first_name: this.state.firstName,
-        last_name: this.state.lastName,
-        email: this.state.emailAddress,
-        username: this.state.userName,
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        email: this.state.email,
+        username: this.state.username,
         password: this.state.password
 
     }
@@ -51,50 +52,51 @@ class Signup extends Component {
     }
             
 render() { 
+  
     return ( 
 
         <>
-           <h1 className="text=center mb-7">Friendly</h1>
+           <h1 className="friendly-header"className="text=center mb-7">Friendly</h1>
     
         <Card  style={{ width: '25rem' }}>
           <Card.Body>
             <h2 className="text-center mb-4">Sign Up</h2>
-            <Form onSubmit={this.handleSubmit}>
-              <Form.Group id="username">
+            <Form  onSubmit={(event) => this.handleSubmit(event)}>
+              <Form.Group id="firstname">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control 
-                type="text" name="firstname" 
+                type="text" name="first_name" 
                 placeholder="first name"
                 onChange={this.handleChange} 
-                value={this.firstName}/>
+                value={this.state.first_name}/>
               </Form.Group>
               <Form.Group id="lastname">
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control type="lastname" name="lastname" 
+                <Form.Control type="last_name" name="last_name" 
                 placeholder="last name"
                 onChange={this.handleChange} 
-                value={this.lastName}/>
+                value={this.state.last_name}/>
               </Form.Group>
               <Form.Group id="emailAddress">
                 <Form.Label>Email Address</Form.Label>
-                <Form.Control type="email" name="emailAddress" 
+                <Form.Control type="email" name="email" 
                 placeholder="email address"
                 onChange={this.handleChange} 
-                value={this.emailAddress}/>
+                value={this.state.email}/>
               </Form.Group>
               <Form.Group id="userName">
                 <Form.Label>User Name</Form.Label>
                 <Form.Control type="username" name="username" 
                 placeholder="Username"
                 onChange={this.handleChange} 
-                value={this.userName}/>
+                value={this.state.username}/>
               </Form.Group>
               <Form.Group id="password">
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" name="password" 
                 placeholder="Password"
                 onChange={this.handleChange} 
-                value={this.password}/>
+                value={this.state.password}/>
               </Form.Group>
               <Button className="w-100" type="submit">
                 Sign Up!

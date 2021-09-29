@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Dropdown } from 'react-bootstrap';
-import UploadPhoto from './ProfilePic'; 
-import InterestsCheckbox from './InterestsCheckboxes'
 // import './UpdateProfile.css';
 
 
@@ -16,9 +14,9 @@ class UpdateProfile extends Component {
             location:"",
             imageUpload: {},
             bio: "",
-            interests: "",//[]?
+            interests: "",
             foodPreferences: "",
-            friends: "", //{[]}?
+            friends: "", 
         }
     }
  
@@ -54,7 +52,7 @@ class UpdateProfile extends Component {
     async updateUser(user) {
         console.log(user)
       try{
-      let response = await axios.post('http://127.0.0.1:8000/profile',user);
+      let response = await axios.post('http://127.0.0.1:8000/api/auth/profile/',user);
       console.log(response.data)
     }
       catch (ex) {
@@ -67,18 +65,19 @@ class UpdateProfile extends Component {
         return ( 
 
             <div>
-            
           <form onSubmit={this.handleSubmit}/>
         <div className="wrapper bg-white mt-sm-5">
     <h4 className="pb-4 border-bottom">Manage Profile</h4>
     <div className="d-flex align-items-start py-3 border-bottom"> 
     {/* <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" classNameName="img" alt=""> */}
-       <UploadPhoto/>
+        <div className="pl-sm-4 pl-2" id="img-section"> <b>Profile Photo</b>
+        <button className="btn button border"><b>Upload</b></button>
+        </div>
     </div>
     <div className="py-2">
         <div className="row py-2">
             <div className="col-md-6"> 
-            <label >Location</label> 
+            <label for="location">Location</label> 
             <input type="text" 
             className="bg-light form-control" 
             onChange={this.handleChange}
@@ -86,39 +85,53 @@ class UpdateProfile extends Component {
             ></input>
             </div>
             <div className="col-md-6 pt-md-0 pt-3"> 
-            <label >Bio</label> 
-            <textarea className="form-control" rows="5" id="comment"></textarea>
-            <input
+            <label for="bio">Bio</label> 
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+            <input type="text" 
+            className="bg-light form-control" 
             onChange={this.handleChange}
-            value={this.bio}
-            />
+            value={this.bio} 
+            ></input>
             </div>
         </div>
-        <InterestsCheckbox/>
         <Dropdown>
   <Dropdown.Toggle variant="success" id="dropdown-basic">
     Food Preferences
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item value={this.foodPreferences} onChange={this.handleChange}>Vegan</Dropdown.Item>
-    <Dropdown.Item value={this.foodPreferences} onChange={this.handleChange}>Vegitarian</Dropdown.Item>
-    <Dropdown.Item value={this.foodPreferences} onChange={this.handleChange}>I Eat Everything</Dropdown.Item>
+    <Dropdown.Item href="#/action-1">Vegan</Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Vegitarian</Dropdown.Item>
+    <Dropdown.Item href="#/action-3">I Eat Everything</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
-          
-           
+           <div>
+            <input type="text" 
+            className="bg-light form-control" 
+            onChange={this.handleChange}
+            value={this.foodPreferences}
+            ></input> 
+            </div>
+            <div className="col-md-6 pt-md-0 pt-3">
+
+            <label>Interests</label> 
+
+            <input type="checkbox"
+            onChange={this.handleChange}
+            value={this.interests}
+            ></input>
+            <label className="form-check-label" for="flexCheckDefault">concerts</label>
+            </div>
+        </div>
+        <div className="row py-2">
+        <div className="form-check">
+  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+  <label className="form-check-label" for="flexCheckDefault">
+    Default checkbox
+  </label>
 </div>
-<div className="checkbox">
-  <label><input type="checkbox" value={this.interests}/>Sporting Events</label>
-</div>
-<div className="checkbox">
-  <label><input type="checkbox" value={this.interests}/>Concerts</label>
-</div>
-<div className="checkbox">
-  <label><input type="checkbox" value={this.interests}/>Food</label>
-</div>
-</div>
+  </div>
+        </div>
         <div    className="py-3 pb-4 border-bottom"> 
         <button className="btn btn-primary mr-3" type="submit" >Save Changes</button>
         <button className="btn border button">Cancel</button> 
@@ -126,10 +139,10 @@ class UpdateProfile extends Component {
         <div className="d-sm-flex align-items-center pt-3" id="deactivate"> 
             <div> <b>Deactivate your account</b>
             </div>
-            <button className="btn btn-danger mr-3" type="submit" >Deactivate</button>
+            <div className="ml-auto"> <button className="btn danger">Deactivate</button>
             </div>
         </div>
-    
+    </div>
    
   
         )};

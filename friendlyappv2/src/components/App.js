@@ -6,6 +6,7 @@ import Login from './Login/Login';
 import Signup from './SignUp/SignUp';
 import Profile from './Profile/Profile';
 import UpdateProfile from './UpdateProfile/UpdateProfile';
+import jwtDecode from "jwt-decode";
 
 
 
@@ -17,6 +18,18 @@ class App extends Component {
       };
   
     }
+
+
+    componentDidMount() {
+      const jwt = localStorage.getItem("token");
+      try {
+          const user = jwtDecode(jwt);
+          this.setState({
+              user,
+          });
+          console.log(user);
+      } catch {}
+  }
 
    render() {
    
@@ -31,8 +44,8 @@ class App extends Component {
        <Route exact path="/" component={Login}  />
        <Route path="/signup" component={Signup}  />
        <Route path="/profile" component={Profile} /> 
-       <Route path="/manageprofile" component={UpdateProfile} />
-       
+       <Route path="/updatemyprofile" component={UpdateProfile} />
+
     </Switch>
     </Router>
     </div>
@@ -44,20 +57,3 @@ class App extends Component {
 
 export default App;
  
-
-{/* (create a component for potiential matches
-       on profile page  ) */} 
-       {/* // (create a create profile page with form for location, bio etc)
-       <Route path= "/" component={Create Profile}/> */}
-
-
-    //    <Route
-    //     path="/profile"
-    //     render={(props) => {
-    //         if (!user) {
-    //             return <Redirect to="/login" />;
-    //         } else {
-    //             return <Profile {...props} user={user} />;
-    //         }
-    //     }}
-    // /> 

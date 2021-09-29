@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
-class DeleteRequest extends React.Component {
+class DeleteRequest extends Component{
     constructor(props) {
         super(props);
 
@@ -11,7 +11,6 @@ class DeleteRequest extends React.Component {
     }
 
     componentDidMount() {
-        // Simple DELETE request with axios
         axios.delete('http://127.0.0.1:8000/api/auth/user')
             .then(() => this.setState({ status: 'Delete successful' }));
     }
@@ -29,6 +28,6 @@ class DeleteRequest extends React.Component {
     }
 }
 
-export { DeleteRequest }; 
+export default DeleteRequest ; 
 
 
