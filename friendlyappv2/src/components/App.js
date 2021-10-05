@@ -1,12 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from './Login/Login';
+import { BrowserRouter as Router, Route, Switch,Redirect } from "react-router-dom";
+import Login from './Login';
 import Signup from './SignUp/SignUp';
 import Profile from './Profile/Profile';
 import UpdateProfile from './UpdateProfile/UpdateProfile';
-import jwtDecode from "jwt-decode";
+// import jwtDecode from "jwt-decode";
+// import PrivateRoute from './PrivateRoute';
+// import PublicRoute from './components/PublicRoute';
 
 
 
@@ -20,16 +22,16 @@ class App extends Component {
     }
 
 
-    componentDidMount() {
-      const jwt = localStorage.getItem("token");
-      try {
-          const user = jwtDecode(jwt);
-          this.setState({
-              user,
-          });
-          console.log(user);
-      } catch {}
-  }
+  //   componentDidMount() {
+  //     const jwt = localStorage.getItem("token");
+  //     try {
+  //         const user = jwtDecode(jwt);
+  //         this.setState({
+  //             user,
+  //         });
+  //         console.log(user);
+  //     } catch {}
+  // }
 
    render() {
    
@@ -41,9 +43,10 @@ class App extends Component {
    
     <Router>
      <Switch>
+     
        <Route exact path="/" component={Login}  />
        <Route path="/signup" component={Signup}  />
-       <Route path="/profile" component={Profile} /> 
+       <Route path="/profile" component={Profile} exact/> 
        <Route path="/updatemyprofile" component={UpdateProfile} />
 
     </Switch>

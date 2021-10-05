@@ -39,7 +39,7 @@ class Signup extends Component {
     this.registerUser(user)
  };
     async registerUser(user) {
-        console.log(user)
+      
       try{
       let response = await axios.post('http://127.0.0.1:8000/api/auth/register/',user);
       console.log(response.data)

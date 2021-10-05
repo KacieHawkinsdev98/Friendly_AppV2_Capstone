@@ -11,19 +11,26 @@ class DeleteRequest extends Component{
     }
 
     componentDidMount() {
-        axios.delete('http://127.0.0.1:8000/api/auth/user')
+        axios.delete('http://127.0.0.1:8000/delete')
             .then(() => this.setState({ status: 'Delete successful' }));
     }
+
+    
 
     render() {
         const { status } = this.state;
         return (
-            <div className="card text-center m-3">
-                <h5 className="card-header"></h5>
-                <div className="card-body">
-                    Status: {status}
-                </div>
+            
+    
+                   
+        <div className="d-sm-flex align-items-center pt-3" id="deactivate"> 
+            <div> <b>Deactivate your account</b>
             </div>
+            <div className="ml-auto"> <button className="btn danger" onClick={status}>Deactivate</button>
+            </div>
+        </div> 
+              
+             
         );
     }
 }

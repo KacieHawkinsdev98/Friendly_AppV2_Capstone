@@ -4,7 +4,7 @@ import axios from 'axios';
 import {handleYelp} from './httpService';
 
 
-const baseUrl = "https://api.yelp.com/v3/events/search"
+const baseUrl = "https://api.yelp.com/v3/categories"
 const config = {
 
  headers: {
@@ -12,15 +12,15 @@ const config = {
          },
           params: {
              location: 'location',
-             term: 'term',
-             posts:[]
+             category: 'bars',
+             
             }
       }
      class YelpSuggestions extends Component {
      state= {
         location: '',
-        term: '',
-        posts: '',
+        category: '',
+       
 
     }
 
@@ -60,25 +60,3 @@ render(){
 
 
 
-// const fetchitems = async () => {
-//     const data = await axios
-//       .get(
-//        'https://api.yelp.com/v3/events/featured',
-//         {
-//           headers: {
-//             Authorization: `Bearer ${BEARER_TOKEN}`
-//           },
-//           params: {
-//             location: 'location',
-//             term: 'term',
-//             categories: 'categories'
-//           },
-//         },
-//       )
-    
-//       .then(json => {
-//         setItems({ items: json.data.businesses })
-//       })
-
-//     }
-//     export default fetchitems;

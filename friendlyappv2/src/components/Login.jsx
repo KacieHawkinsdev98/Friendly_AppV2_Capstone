@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Card, Button, Form} from "react-bootstrap";
+import { Card, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 
@@ -8,21 +8,32 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            emailAddress: "",
+            username: "",
             password: ""
          };
     
-
+        //  this.onLogin = this.onLogin.bind(this);
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
+  
 }
 
-async userLogin(user){
-    const response = await axios.post('http://127.0.0.1:8000/api/auth/login', user).then((res) => {
+userLogin(user){
+
+  try{
+    const response = axios.post('http://127.0.0.1:8000/api/auth/login', user).then((res) => {
         localStorage.setItem("token", res.data.access)
     });
-   
+   console.log(response)
+  }
+  catch (ex) {
+     console.log('There was an error!');
+
+    }          
+
 }
+        
+
     handleChange = (event)=> {
         this.setState({[event.target.name]: event.target.value });
             
@@ -31,18 +42,39 @@ async userLogin(user){
     handleSubmit = (event) => {
         event.preventDefault();
         var user = {
-            email: this.state.emailAddress,
+            username: this.state.username,
             password: this.state.password
         };
+        
         this.userLogin(user)
         this.setState({
             token: user
         })
 
-        alert('you have sucessfully logged in');
     }
 
-     render() { 
+  //   onLogin() {
+  //     this.props.history.push('/profile');
+  // }
+
+  //   getCurrentUser() {
+  //     return JSON.parse(localStorage.getItem('user'));;
+  //   }
+
+  //   authUser() {
+  //     const user = JSON.parse(localStorage.getItem('user'));
+    
+  //     if (user && user.accessToken) {
+  //       console.log(user)
+  //       return { Authorization: 'Bearer ' + user.accessToken };
+  //     } else {
+  //       console.log("there was an error while getting token")
+  //       return {};
+  //     }
+  //   }
+
+    render() { 
+
         return ( 
 
             <>
@@ -51,29 +83,30 @@ async userLogin(user){
             <Card  style={{ width: '25rem' }}>
               <Card.Body>
                 <h2 className="text-center mb-4">Log In</h2>
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit}  >
                   <Form.Group id="email">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label>Username</Form.Label>
                     <Form.Control 
-                    type="email" name="email" 
-                    placeholder="Email Address"
+                    type="username" name="username" 
+                    placeholder="Username"
                     onChange={this.handleChange} 
-                    value={this.emailAddress}/>
+                    value={this.state.username}/>
                   </Form.Group>
                   <Form.Group id="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name="password" 
                     placeholder="password"
                     onChange={this.handleChange} 
-                    value={this.password}/>
+                    value={this.state.password}/>
                   </Form.Group>
-                  <Button className="w-100" type="submit">
+                  <Button className="w-100" type="submit" >
                     Log In
                   </Button>
                 </Form>
                   <div className="w-100 text-center mt-2">
               Need an account? <Link to="/signup">Sign Up</Link>
             </div>
+            <button onClick={() => console.log(localStorage.getItem("token"))}>Click for Token!</button>
               </Card.Body>
             </Card>
           

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Dropdown } from 'react-bootstrap';
-// import './UpdateProfile.css';
+import { Form, Card, Button} from 'react-bootstrap';
+import Autocomplete from 'react-google-autocomplete';
+import UploadPhoto from './ProfilePic';
 
 
 
@@ -10,20 +11,17 @@ class UpdateProfile extends Component {
         super(props);
         this.state = { 
             user: {},
-            birthDate: "",
             location:"",
-            imageUpload: {},
+            imageUpload: null,
             bio: "",
-            interests: "",
-            foodPreferences: "",
-            friends: "", 
+            favorite_activity: "",
+            favorite_food: "",
+            
         }
     }
  
       
- 
- 
-    handleChange = (event) => {
+ handleChange = (event) => {
     console.log (event.target.value)
     this.setState({
         [event.target.name]: event.target.value,
@@ -36,13 +34,12 @@ class UpdateProfile extends Component {
  handleSubmit = (event) => {
     event.preventDefault();
     var user ={
-        birth_date: this.state.birthDate,
         location: this.state.location,
         image: this.state.imageUpload,
         bio: this.state.bio,
-        interests: this.state.interests,
-        food_preferences: this.state.foodPreferences,
-        friends: this.state.friends,
+        favorite_food: this.state.favorite_food,
+        favorite_activity: this.state.favorite_activity,
+    
 
     }
     this.updateUser(user)
@@ -52,7 +49,7 @@ class UpdateProfile extends Component {
     async updateUser(user) {
         console.log(user)
       try{
-      let response = await axios.post('http://127.0.0.1:8000/api/auth/profile/',user);
+      let response = await axios.post('http://127.0.0.1:8000/profile/',user);
       console.log(response.data)
     }
       catch (ex) {
@@ -61,93 +58,70 @@ class UpdateProfile extends Component {
         }          
     } 
 
-    render() {
+    render() { 
+
         return ( 
 
-            <div>
-          <form onSubmit={this.handleSubmit}/>
-        <div className="wrapper bg-white mt-sm-5">
-    <h4 className="pb-4 border-bottom">Manage Profile</h4>
-    <div className="d-flex align-items-start py-3 border-bottom"> 
-    {/* <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" classNameName="img" alt=""> */}
-        <div className="pl-sm-4 pl-2" id="img-section"> <b>Profile Photo</b>
-        <button className="btn button border"><b>Upload</b></button>
-        </div>
-    </div>
-    <div className="py-2">
-        <div className="row py-2">
-            <div className="col-md-6"> 
-            <label for="location">Location</label> 
-            <input type="text" 
-            className="bg-light form-control" 
-            onChange={this.handleChange}
-            value={this.location}
-            ></input>
-            </div>
-            <div className="col-md-6 pt-md-0 pt-3"> 
-            <label for="bio">Bio</label> 
-            <textarea class="form-control" rows="5" id="comment"></textarea>
-            <input type="text" 
-            className="bg-light form-control" 
-            onChange={this.handleChange}
-            value={this.bio} 
-            ></input>
-            </div>
-        </div>
-        <Dropdown>
-  <Dropdown.Toggle variant="success" id="dropdown-basic">
-    Food Preferences
-  </Dropdown.Toggle>
-
-  <Dropdown.Menu>
-    <Dropdown.Item href="#/action-1">Vegan</Dropdown.Item>
-    <Dropdown.Item href="#/action-2">Vegitarian</Dropdown.Item>
-    <Dropdown.Item href="#/action-3">I Eat Everything</Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
-           <div>
-            <input type="text" 
-            className="bg-light form-control" 
-            onChange={this.handleChange}
-            value={this.foodPreferences}
-            ></input> 
-            </div>
-            <div className="col-md-6 pt-md-0 pt-3">
-
-            <label>Interests</label> 
-
-            <input type="checkbox"
-            onChange={this.handleChange}
-            value={this.interests}
-            ></input>
-            <label className="form-check-label" for="flexCheckDefault">concerts</label>
-            </div>
-        </div>
-        <div className="row py-2">
-        <div className="form-check">
-  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-  <label className="form-check-label" for="flexCheckDefault">
-    Default checkbox
-  </label>
-</div>
-  </div>
-        </div>
-        <div    className="py-3 pb-4 border-bottom"> 
-        <button className="btn btn-primary mr-3" type="submit" >Save Changes</button>
-        <button className="btn border button">Cancel</button> 
-        </div>
-        <div className="d-sm-flex align-items-center pt-3" id="deactivate"> 
-            <div> <b>Deactivate your account</b>
-            </div>
-            <div className="ml-auto"> <button className="btn danger">Deactivate</button>
-            </div>
-        </div>
-    </div>
-   
-  
-        )};
-  
+            <>
+               <h1 className="text=center mb-7">Friendly</h1>
         
+            <Card  style={{ width: '25rem' }}>
+              <Card.Body>
+                <h2 className="text-center mb-4">Manage Profile</h2>
+                <Form onSubmit={this.handleSubmit} >
+                  <Form.Group id="img-section">
+                    <Form.Label>Profile Photo</Form.Label>
+                    <Form.Control 
+                    type="file" name="image" 
+                    onChange={this.handleChange} 
+                    value={this.state.imageUpload}/>
+                  </Form.Group>
+                  <br></br>
+                 <Form.Group id="location">
+                 <Form.Label>Location</Form.Label>
+                   <br></br>
+                   <Autocomplete
+                    apiKey={"AIzaSyAOX0tmkMiG1G5PdGu86dqGqOZdEmFv4fg"}
+                    onPlaceSelected={(place) => console.log(place)}
+                    name="location"
+                    onChange={this.handleChange} 
+                    value={this.state.location}
+                    />
+                  </Form.Group>
+                  <Form.Group id="comment">
+                    <Form.Label>Bio</Form.Label>
+                    <Form.Control 
+                    rows="5" 
+                    type="text" name="bio" 
+                    onChange={this.handleChange} 
+                    value={this.state.bio}/>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Favorite Activity</Form.Label>
+                    <Form.Control 
+                    type="text" name="favorite_activity" 
+                    onChange={this.handleChange} 
+                    value={this.state.favorite_activity}/>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Favorite Food</Form.Label>
+                    <Form.Control 
+                    type="text" name="favorite_food" 
+                    onChange={this.handleChange} 
+                    value={this.state.favorite_food}/>
+                  </Form.Group>
+                  <Button className="w-100" type="submit">
+                    Update
+                  </Button>
+               </Form>
+            </Card.Body>
+            </Card>
+          
+          </>
+
+   
+         );
+    }
 }
- 
+
 export default UpdateProfile;
