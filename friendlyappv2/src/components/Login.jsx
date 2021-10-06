@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Card, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import './Login.css'
 
 class Login extends Component {
     constructor(props) {
@@ -59,8 +59,8 @@ async userLogin(user){
         return ( 
 
             <>
-               <h1 className="text=center mb-7">Friendly</h1>
-        
+               <h1 className="text=center mb-6">Friendly</h1>
+               
             <Card  style={{ width: '25rem' }}>
               <Card.Body>
                 <h2 className="text-center mb-4">Log In</h2>
@@ -88,7 +88,6 @@ async userLogin(user){
                   <div className="w-100 text-center mt-2">
               Need an account? <Link to="/signup">Sign Up</Link>
             </div>
-            <button onClick={() => console.log(localStorage.getItem("token"))}>Click for Token!</button>
               </Card.Body>
             </Card>
           
