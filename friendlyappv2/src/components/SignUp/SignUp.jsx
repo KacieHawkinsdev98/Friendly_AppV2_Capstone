@@ -56,7 +56,7 @@ render() {
     return ( 
 
         <>
-           <h1 className="friendly-header"className="text=center mb-7">Friendly</h1>
+           <h1 className="text=center mb-7">Friendly</h1>
     
         <Card  style={{ width: '25rem' }}>
           <Card.Body>

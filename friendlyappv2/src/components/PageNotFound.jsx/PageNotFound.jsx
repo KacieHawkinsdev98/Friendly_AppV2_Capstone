@@ -1,12 +1,17 @@
-import React from 'react';
+import { Component } from "react"
 
 
-function PageNotFound()
 
-return (
-    <h1>
-        Page Not Found!
-    </h1>
-)
-
+class PageNotFound extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {  }
+    }
+    render() { 
+        return (
+            <h>Page Not Found!</h>
+          );
+    }
+}
+ 
 export default PageNotFound;

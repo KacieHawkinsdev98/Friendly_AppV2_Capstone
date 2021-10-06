@@ -12,16 +12,16 @@ class Login extends Component {
             password: ""
          };
     
-        //  this.onLogin = this.onLogin.bind(this);
+        
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
   
 }
 
-userLogin(user){
+async userLogin(user){
 
   try{
-    const response = axios.post('http://127.0.0.1:8000/api/auth/login', user).then((res) => {
+    const response = await axios.post('http://127.0.0.1:8000/api/auth/login', user).then((res) => {
         localStorage.setItem("token", res.data.access)
     });
    console.log(response)
@@ -53,25 +53,6 @@ userLogin(user){
 
     }
 
-  //   onLogin() {
-  //     this.props.history.push('/profile');
-  // }
-
-  //   getCurrentUser() {
-  //     return JSON.parse(localStorage.getItem('user'));;
-  //   }
-
-  //   authUser() {
-  //     const user = JSON.parse(localStorage.getItem('user'));
-    
-  //     if (user && user.accessToken) {
-  //       console.log(user)
-  //       return { Authorization: 'Bearer ' + user.accessToken };
-  //     } else {
-  //       console.log("there was an error while getting token")
-  //       return {};
-  //     }
-  //   }
 
     render() { 
 
@@ -99,8 +80,9 @@ userLogin(user){
                     onChange={this.handleChange} 
                     value={this.state.password}/>
                   </Form.Group>
-                  <Button className="w-100" type="submit" >
-                    Log In
+                  <Button className="w-100" type="submit"
+                   onClick={()=>{this.props.history.push('/profile')}} 
+                   > Log In 
                   </Button>
                 </Form>
                   <div className="w-100 text-center mt-2">

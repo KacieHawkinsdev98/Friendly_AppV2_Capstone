@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: aliceblue
+    background-color: rgb(226, 147, 0)
 }
 
 .wrapper {
@@ -17,6 +17,20 @@ body {
     border-radius: 15px;
     margin: 10px auto;
     max-width: 600px
+}
+
+h1 {
+    font-family: 'Lobster', cursive;
+    color: rgb(255, 201, 23);
+   
+}
+
+h2 {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: right;
+    
+
 }
 
 h4 {

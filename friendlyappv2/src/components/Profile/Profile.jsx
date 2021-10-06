@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import Login from '../Login';
 import './Profile.css';
+import { Nav, Navbar, Container, Link} from 'react-bootstrap';
+
+
 
 
 class Profile extends Component {
@@ -13,32 +15,30 @@ class Profile extends Component {
         }
 
         
-    
-
-
-
     render() { 
 
         return (  
            <div>
+  <Navbar bg="primary" variant="dark">
+    <Container>
+    <Navbar.Brand href="#profile" w="100" >Friendly</Navbar.Brand>
+    <Nav className="me-auto">
+      <Nav.Link href="#signup">Home</Nav.Link>
+      <Nav.Link href="#discoverfriends">Discover Friends</Nav.Link>
+      <Nav.Link href="#manageprofile">Edit Profile</Nav.Link>
+      <Nav.Link href="#logout">Log Out</Nav.Link>
+    </Nav>
+    </Container>
+  </Navbar>
 
-             <h1>this is the profile page</h1>
-        
-            
-           <ul className="nav flex-column">
-  <li className="nav-item">
-    <div className="nav-link active" />
-  </li>
-  <li className="nav-item">
-    <a className="nav-link" href="http://localhost:3000/profile">Discover Friends</a>
-  </li>
-  <li className="nav-item">
-    <a className="nav-link" href="http://localhost:3000/updatemyprofile">Edit Profile</a>
-  </li>
-  </ul>
-        </div>
+           </div>
+
+
+  
+
+    
         );
-    }
+}
 }
  
 export default Profile;
